@@ -1,2 +1,3 @@
 # gentoo-overlay
-Gentoo packages not found elsewhere
+
+Gentoo packages not found elsewhere. 

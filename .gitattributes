@@ -1,0 +1,2 @@
+# indicate that ebuilds with the specified EAPIs are deprecated
+net-print/epson-inkjet-printer-escpr/files/1.6.26-warnings.patch -text
