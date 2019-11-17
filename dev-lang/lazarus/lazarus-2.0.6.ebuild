@@ -6,12 +6,12 @@ EAPI=7
 inherit desktop
 
 FPCVER="3.0.4"
-PYTHON_HASH="586eec1a5ea609ef9df2bf586be06825d9fbd50f"
+PYTHON_LAZARUS_VERSION="2019.10.29"
 
 DESCRIPTION="Lazarus IDE is a feature rich visual programming environment emulating Delphi"
 HOMEPAGE="https://www.lazarus-ide.org/"
 SRC_URI="
-	python? ( https://github.com/Alexey-T/Python-for-Lazarus/archive/${PYTHON_HASH}.tar.gz ->\
+	python? ( https://github.com/Alexey-T/Python-for-Lazarus/archive/${PYTHON_LAZARUS_VERSION}.tar.gz ->\
 		${P}-python.tar.gz )
 	https://sourceforge.net/projects/${PN}/files/Lazarus%20Zip%20_%20GZip/Lazarus%20${PV}/${P}.tar.gz"
 
@@ -30,7 +30,7 @@ RESTRICT="strip" #269221
 
 S="${WORKDIR}/${PN}"
 
-PATCHES=( "${FILESDIR}"/${PN}-0.9.26-fpcsrc.patch )
+PATCHES=( "${FILESDIR}"/${PN}-0.9.26-fpcsrc.patch "${FILESDIR}"/${PN}-2.0.6-lazbuild-ide.patch )
 
 src_prepare() {
 	default
@@ -55,12 +55,12 @@ src_compile() {
 	if use python; then
 		addpredict ide/exttools.pas
 		./lazbuild -B --lazarusdir="." --pcp="../lazarus-package-config" --build-ide= \
-			--add-package ../Python-for-Lazarus-${PYTHON_HASH}/python4lazarus/python4lazarus_package.lpk \
+			--add-package ../Python-for-Lazarus-${PYTHON_LAZARUS_VERSION}/python4lazarus/python4lazarus_package.lpk \
 			|| die
-		sed -i -e "s:${WORKDIR}/Python-for-Lazarus-${PYTHON_HASH}:/etc/lazarus:g" \
+		sed -i -e "s:${WORKDIR}/Python-for-Lazarus-${PYTHON_LAZARUS_VERSION}:/etc/lazarus:g" \
 			../lazarus-package-config/packagefiles.xml \
 			../lazarus-package-config/idemake.cfg \
-			../Python-for-Lazarus-${PYTHON_HASH}/python4lazarus/lib/x86_64-linux/python4lazarus_package.compiled \
+			../Python-for-Lazarus-${PYTHON_LAZARUS_VERSION}/python4lazarus/lib/x86_64-linux/python4lazarus_package.compiled \
 			|| die
 		sed -i -e "s:${WORKDIR}/lazarus-package-config:/etc/lazarus:g" \
 			../lazarus-package-config/idemake.cfg \
@@ -98,7 +98,7 @@ src_install() {
 		dodir /etc/lazarus
 		cp -rf ../lazarus-package-config/* \
 			"${ED%/}"/etc/lazarus || die
-		cp -rf ../Python-for-Lazarus-${PYTHON_HASH}/python4lazarus \
+		cp -rf ../Python-for-Lazarus-${PYTHON_LAZARUS_VERSION}/python4lazarus \
 			"${ED%/}"/etc/lazarus || die
 	fi
 
