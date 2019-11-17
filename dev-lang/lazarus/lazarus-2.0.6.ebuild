@@ -41,11 +41,6 @@ src_prepare() {
 		sed -e 's/^FPBIN=/#&/' /usr/lib/fpc/${FPCVER}/samplecfg |
 			sh -s /usr/lib/fpc/${FPCVER} "${PPC_CONFIG_PATH}" || die
 	fi
-	sed -i \
-		-e "s;SecondaryConfigPath:='/etc/lazarus';SecondaryConfigPath:=ExpandFileNameUTF8('~/.lazarus');g" \
-		-e "s;PrimaryConfigPath:=ExpandFileNameUTF8('~/.lazarus');PrimaryConfigPath:='/etc/lazarus';g" \
-		ide/include/unix/lazbaseconf.inc \
-		|| die
 }
 
 src_compile() {
