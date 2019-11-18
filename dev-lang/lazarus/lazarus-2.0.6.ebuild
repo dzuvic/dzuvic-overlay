@@ -15,7 +15,7 @@ SRC_URI="
 		${P}-python.tar.gz )
 	https://sourceforge.net/projects/${PN}/files/Lazarus%20Zip%20_%20GZip/Lazarus%20${PV}/${P}.tar.gz"
 
-LICENSE="GPL-2 LGPL-2.1-with-linking-exception"
+LICENSE="GPL-2 LGPL2-lazarus-linking-exception"
 SLOT="0" # Note: Slotting Lazarus needs slotting fpc, see DEPEND.
 KEYWORDS="~amd64 ~x86"
 IUSE="minimal python"
