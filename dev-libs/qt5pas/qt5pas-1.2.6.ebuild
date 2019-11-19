@@ -37,7 +37,7 @@ src_prepare(){
 	eqmake5 Qt5Pas.pro
 }
 
-#src_install(){
-#	dolib libQt4Pas*
-#}
+src_install(){
+	emake INSTALL_ROOT="$D" install
+}
 
