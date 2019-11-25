@@ -54,7 +54,8 @@ src_install(){
 
 	newicon pixmaps/mainicon/colored/v4_3.png ${PN}.png
 
-	rsync -a "${S}/build/" "${D}/usr/share/" || die "Unable to copy files"
+	rsync -a  --exclude="doublecmd.inf" \
+	  "${S}/build/" "${D}/usr/share/" || die "Unable to copy files"
 
 	dosym ../share/${PN}/${PN} /usr/bin/${PN}
 
