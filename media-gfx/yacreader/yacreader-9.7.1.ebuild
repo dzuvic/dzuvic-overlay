@@ -3,11 +3,11 @@
 
 EAPI=7
 
-inherit qmake-utils eutils fdo-mime
+inherit qmake-utils eutils xdg-utils
 
 DESCRIPTION="A comic reader for cross-platform reading and managing your digital comic collection"
 HOMEPAGE="http://www.yacreader.com"
-REVISION="1909283"
+REVISION="2009123"
 
 if [[ ${PV} == 9999 ]];then
 	inherit git-r3
@@ -15,7 +15,6 @@ if [[ ${PV} == 9999 ]];then
 	KEYWORDS=""
 	EGIT_REPO_URI="https://github.com/YACReader/${PN}.git"
 else
-	#SRC_URI="https://github.com/YACReader/${PN}/releases/download/${PV}/${P}-src.tar.xz"
 	SRC_URI="https://github.com/YACReader/${PN}/releases/download/${PV}/${P}.${REVISION}-src.tar.xz"
 	KEYWORDS="~x86 ~amd64 ~arm"
 fi
@@ -56,14 +55,12 @@ src_install(){
 }
 
 pkg_postinst(){
-	fdo-mime_mime_database_update
-	fdo-mime_desktop_database_update
+	xdg_mimeinfo_database_update
 	xdg_icon_cache_update
 	xdg_desktop_database_update
 }
 
 pkg_postrm(){
-	fdo-mime_mime_database_update
-	fdo-mime_desktop_database_update
+	xdg_mimeinfo_database_update
 	xdg_desktop_database_update
 }
